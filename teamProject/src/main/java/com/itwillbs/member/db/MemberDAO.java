@@ -233,10 +233,14 @@ public class MemberDAO {
 			pstmt.setString(1, mem_id);
 			rs = pstmt.executeQuery();
 			if ( rs.next()) {
-				if(rs.getString("mem_img").equals("")||rs.getString("mem_img")== null) {
-					return "http://localhost:8080/resource/image/hibookprofile.png";
-				}
-				return "/upload/" + rs.getString("mem_img");
+				 if(rs.getString("mem_img")!= null && !rs.getString("mem_img").equals("")  && !rs.getString("mem_img").equals("null")) {
+  //				if(rs.getString("mem_img").equals("")||rs.getString("mem_img")== null) {
+					 	return "http://itwillbs7.cafe24.com/teamProject/upload/" + rs.getString("mem_img");
+	//					return "http://itwillbs7.cafe24.com/teamProject/resource/image/hibookprofile.png";
+				 } else{
+		                return "http://itwillbs7.cafe24.com/teamProject/resource/image/hibookprofile.png";
+		            }
+//				return "/teamProject/upload/" + rs.getString("mem_img");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -249,7 +253,8 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return "http://localhost:8080/resource/image/hibookprofile.png";
+		return "/teamProject/resource/image/hibookprofile.png";
+//		return "http://localhost:8080/resource/image/hibookprofile.png";
 	}//getProfile
 	
 	
