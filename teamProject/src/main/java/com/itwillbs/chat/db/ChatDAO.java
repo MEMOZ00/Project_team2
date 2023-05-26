@@ -77,7 +77,7 @@ public class ChatDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String SQL = "SELECT * FROM chat WHERE ((from_id = ? AND to_id = ?) OR (from_id = ? AND to_id = ?)) AND chat_id > (SELECT MAX(chat_id) - ? FROM CHAT WHERE (from_id = ? AND to_id = ?) OR (from_id = ? AND to_id = ?)) ORDER BY chat_time";
+		String SQL = "SELECT * FROM chat WHERE ((from_id = ? AND to_id = ?) OR (from_id = ? AND to_id = ?)) AND chat_id > (SELECT MAX(chat_id) - ? FROM chat WHERE (from_id = ? AND to_id = ?) OR (from_id = ? AND to_id = ?)) ORDER BY chat_time";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(SQL);
@@ -127,7 +127,7 @@ public class ChatDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String SQL = "SELECT * FROM chat WHERE chat_id IN (SELECT MAX(chat_id) FROM CHAT WHERE to_id = ? OR from_id = ? GROUP BY from_id, to_id)";
+		String SQL = "SELECT * FROM chat WHERE chat_id IN (SELECT MAX(chat_id) FROM chat WHERE to_id = ? OR from_id = ? GROUP BY from_id, to_id)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(SQL);
